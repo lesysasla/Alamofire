@@ -1,0 +1,16 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: macOS-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run a one-line script
+      run: echo Hello, world!
+    - name: Run xcodebuild tests
+      run: |
+        xcodebuild -workspace "Alamofire.xcworkspace" -scheme "Alamofire iOS" -destination "OS=12.2,name=iPhone XS" -configuration Release ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty;
